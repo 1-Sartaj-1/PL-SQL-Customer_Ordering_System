@@ -1,4 +1,17 @@
 # Welcome to my Domino's Pizza's Customer Ordering System using PL/SQL!!!
+This project implements a customer ordering system for Domino's Pizza using PL/SQL. It covers fundamental database concepts and programming constructs within the Oracle database environment.
+
+Throughout this project, utilizing our PL/SQL skills we'll build the following components:
+
+**Database Design**: Creation and management of **DOMINOS_CUSTOMERS** and **DOMINOS_ORDERS** tables for structured data storage.   
+
+**Stored Procedures**: We'll build three stored procedures such as **ADD_DOMINOS_CUSTOMER**(Adds new Domino's customers), **CREATE_DOMINOS_ORDER** (Handles new orders, including checking for customer existence) and **APPLY_DISCOUNT**(modifies an order total based on a discount rate).  
+
+**Custom Function**: We'll develop the function **GET_CUSTOMER_ORDER_COUNT** which returns the total number of orders for a given customer ID.
+
+**PL/SQL Fundamentals**: Utilization of DECLARE, BEGIN, and END blocks, variable declaration and usage, and basic arithmetic operations.   
+
+This project provides a foundational understanding of building a simple customer ordering system and highlights key PL/SQL programming techniques and database interactions.
 
 ## STEP 1: Creating Database Tables
 
@@ -214,7 +227,8 @@ END;
 
 ![Alt text](6-APPLY_DISCOUNT.png)
 
-
+## Conclusion
+This project successfully built the outlined Domino's customer and order tables, implemented the specified stored procedures and function, and demonstrated fundamental PL/SQL concepts, effectively covering the planned scope.
 
 
 
