@@ -1,38 +1,40 @@
-# Welcome to my PEI Pizza's Customer Ordering System using PL/SQL !!!
+# Welcome to my Domino's Pizza's Customer Ordering System using PL/SQL!!!
 
-step-1
+## STEP 1: Creating Database Tables
 
-We begin by creating a **DOMINOS** table to store the information about our loyal pizza customers.
+We begin by creating a **DOMINOS_CUSTOMERS** table to store the information about our loyal pizza customers.
 ```sql
 CREATE TABLE DOMINOS_CUSTOMERS (
     customer_id   NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     first_name    VARCHAR2(50) NOT NULL,
     last_name     VARCHAR2(50) NOT NULL,
-    phone_number  VARCHAR2(20) UNIQUE, -- Phone number could be a good unique identifier
+    phone_number  VARCHAR2(20) UNIQUE, 
     join_date     DATE DEFAULT SYSDATE NOT NULL
 );
 ```
-![Alt text](1.png)
-Next we will create **Dominos** table to record each order placed by a customer and define a foreign key constraint linking orders to customers.
+
+![Alt text](1-DOMINOS_CUSTOMERS.png)
+
+Next, we will create **DOMINOS_ORDER** table to record each order placed by a customer and define a foreign key constraint to link orders back to the customers.
 ```sql
 CREATE TABLE DOMINOS_ORDERS (
     order_id         NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     customer_id      NUMBER NOT NULL,
     order_date       DATE DEFAULT SYSDATE NOT NULL,
     order_total      NUMBER(10, 2) NOT NULL,
-    delivery_method  VARCHAR2(20), -- e.g., 'Delivery', 'Carryout'
-    order_status     VARCHAR2(20) DEFAULT 'Pending' NOT NULL, -- e.g., 'Pending', 'Complete'
+    delivery_method  VARCHAR2(20), 
+    order_status     VARCHAR2(20) DEFAULT 'Pending' NOT NULL,
 
     CONSTRAINT fk_dominos_customer
         FOREIGN KEY (customer_id)
         REFERENCES DOMINOS_CUSTOMERS(customer_id)
 );
 ```
-![Alt text](2.png)
 
-step - 2
+![Alt text](2-DOMINOS_ORDERS.png)
 
-procedure creation
+## Step-2 Creating the ADD_DOMINOS_CUSTOMER Stored Procedure
+Let's create a stored procedure to handle adding new customers to our **DOMINOS_CUSTOMERS** table. This procedure will demonstrate creating a stored procedure, using IN parameters, and embedding an INSERT statement within PL/SQL.
 
 ```sql
 CREATE OR REPLACE PROCEDURE ADD_DOMINOS_CUSTOMER (
@@ -50,25 +52,29 @@ BEGIN
 END ADD_DOMINOS_CUSTOMER;
 /
 ```
-message after executing this block: 'Procedure ADD_DOMINOS_CUSTOMER compiled'
+Compile the procedure by executing the code block above in your Oracle client tool.
 
-to compile:
+Test the procedure by calling it from an anonymous PL/SQL block.
 ```sql
 SET SERVEROUTPUT ON;
 BEGIN 
-  ADD_DOMINOS_CUSTOMER('John', 'Wick', '555-1234'); ADD_DOMINOS_CUSTOMER('Jane', 'Mary', '555-5678'); 
+  ADD_DOMINOS_CUSTOMER('John', 'Wick', '555-1234');
+  ADD_DOMINOS_CUSTOMER('Jane', 'Mary', '555-5678'); 
 END;
 /
 ```
 
-To verify the data:
+![Alt text](3.0-ADD_DOMINOS_CUSTOMER.png)
+
+Verify that the procedure worked and see the customers by selecting from the table.
 ```sql
 SELECT * FROM DOMINOS_CUSTOMERS;
 ```
-![Alt text](3.png)
 
-step- 3
-handling orders
+![Alt text](3-ADD_DOMINOS_CUSTOMER.png)
+
+## Step - 3 Handling orders with CREATE_DOMINOS_ORDER procedure
+This procedure will take customer and order details as input and add a new order to the DOMINOS_ORDERS table. This procedure demonstrates using IN parameters, checking for data existence using SELECT INTO, and implementing conditional logic with IF-ELSE before performing an INSERT.
 
 ```sql
 CREATE OR REPLACE PROCEDURE CREATE_DOMINOS_ORDER (
@@ -98,8 +104,11 @@ BEGIN
 END CREATE_DOMINOS_ORDER;
 /
 ```
-compile and test
+Compile the procedure by executing the code block above.
 
+![Alt text](4.0-CREATE_DOMINOS_ORDER.png)
+
+Test the procedure by calling it from an anonymous PL/SQL block.
 ```sql
 SET SERVEROUTPUT ON;
 BEGIN
@@ -119,11 +128,11 @@ BEGIN
 END;
 /
 ```
-we can see our two customers loves pizza!!
-![Alt text](4.png)
 
-step - 4
-custom functions
+![Alt text](4-CREATE_DOMINOS_ORDER.png)
+
+## Step - 4 Creating the GET_CUSTOMER_ORDER_COUNT Function
+This function will take a customer ID as input and return the total number of orders that customer has placed in the **DOMINOS_ORDERS** table. This demonstrates creating a function, using an IN parameter, using SELECT INTO to fetch an aggregate value (COUNT(*)), and using the RETURN clause.
 
 ```sql
 CREATE OR REPLACE FUNCTION GET_CUSTOMER_ORDER_COUNT (
@@ -147,8 +156,9 @@ EXCEPTION
 END GET_CUSTOMER_ORDER_COUNT;
 /
 ```
+Compile the function by executing the code block above in your Oracle client tool.
 
-compiling
+Test the function by calling it from an anonymous PL/SQL block (Functions can also be called directly within SQL queries).
 ```sql
 SET SERVEROUTPUT ON;
 DECLARE
@@ -163,11 +173,11 @@ BEGIN
 END;
 /
 ```
-![Alt text](5.png)
 
-STEP - 4
+![Alt text](5-GET_CUSTOMER_ORDER_COUNT.png)
 
-procedure utilizing IN OUT parameter. 
+## STEP-5 Handling Customer Discounts with APPLY_DISCOUNT Procedure
+Let's create a procedure called APPLY_DISCOUNT that takes an order total as an IN OUT parameter and applies a fixed discount. This demonstrates the use of an IN OUT parameter, which allows a value to be passed into the procedure, modified, and the updated value passed back to the calling environment.
 ```sql
 CREATE OR REPLACE PROCEDURE APPLY_DISCOUNT (
     p_order_total   IN OUT NUMBER, 
@@ -179,8 +189,9 @@ BEGIN
 END APPLY_DISCOUNT;
 /
 ```
+Compile the procedure by executing the code block above in your Oracle client tool.
 
-compiling
+Test the procedure using an anonymous PL/SQL block to demonstrate how the IN OUT parameter changes the value of a variable passed into it.
 ```sql
 SET SERVEROUTPUT ON;
 
@@ -200,7 +211,8 @@ BEGIN
 END;
 /
 ```
-![Alt text](6.png)
+
+![Alt text](6-APPLY_DISCOUNT.png)
 
 
 
