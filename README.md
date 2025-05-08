@@ -5,7 +5,7 @@ Throughout this project, utilizing our PL/SQL skills we'll build the following c
 
 **Database Design**: Creation and management of **DOMINOS_CUSTOMERS** and **DOMINOS_ORDERS** tables for structured data storage.   
 
-**Stored Procedures**: We'll build three stored procedures such as **ADD_DOMINOS_CUSTOMER**(Adds new Domino's customers), **CREATE_DOMINOS_ORDER** (Handles new orders, including checking for customer existence) and **APPLY_DISCOUNT**(modifies an order total based on a discount rate).  
+**Stored Procedures**: We'll build three stored procedures such as **ADD_DOMINOS_CUSTOMER**(adds new Domino's customers), **CREATE_DOMINOS_ORDER** (handles new orders, including checking for customer existence) and **APPLY_DISCOUNT**(modifies an order total based on a discount rate).  
 
 **Custom Function**: We'll develop the function **GET_CUSTOMER_ORDER_COUNT** which returns the total number of orders for a given customer ID.
 
