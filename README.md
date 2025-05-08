@@ -46,7 +46,7 @@ CREATE TABLE DOMINOS_ORDERS (
 
 ![Alt text](2-DOMINOS_ORDERS.png)
 
-## Step-2 Creating the ADD_DOMINOS_CUSTOMER Stored Procedure
+## STEP 2: Creating the ADD_DOMINOS_CUSTOMER Stored Procedure
 Let's create a stored procedure to handle adding new customers to our **DOMINOS_CUSTOMERS** table. This procedure will demonstrate creating a stored procedure, using IN parameters, and embedding an INSERT statement within PL/SQL.
 
 ```sql
@@ -86,7 +86,7 @@ SELECT * FROM DOMINOS_CUSTOMERS;
 
 ![Alt text](3-ADD_DOMINOS_CUSTOMER.png)
 
-## Step - 3 Handling orders with CREATE_DOMINOS_ORDER procedure
+## STEP 3: Handling orders with CREATE_DOMINOS_ORDER procedure
 This procedure will take customer and order details as input and add a new order to the DOMINOS_ORDERS table. This procedure demonstrates using IN parameters, checking for data existence using SELECT INTO, and implementing conditional logic with IF-ELSE before performing an INSERT.
 
 ```sql
@@ -144,7 +144,7 @@ END;
 
 ![Alt text](4-CREATE_DOMINOS_ORDER.png)
 
-## Step - 4 Creating the GET_CUSTOMER_ORDER_COUNT Function
+## STEP 4: Creating the GET_CUSTOMER_ORDER_COUNT Function
 This function will take a customer ID as input and return the total number of orders that customer has placed in the **DOMINOS_ORDERS** table. This demonstrates creating a function, using an IN parameter, using SELECT INTO to fetch an aggregate value (COUNT(*)), and using the RETURN clause.
 
 ```sql
@@ -189,7 +189,7 @@ END;
 
 ![Alt text](5-GET_CUSTOMER_ORDER_COUNT.png)
 
-## STEP-5 Handling Customer Discounts with APPLY_DISCOUNT Procedure
+## STEP 5 Handling Customer Discounts with APPLY_DISCOUNT Procedure
 Let's create a procedure called APPLY_DISCOUNT that takes an order total as an IN OUT parameter and applies a fixed discount. This demonstrates the use of an IN OUT parameter, which allows a value to be passed into the procedure, modified, and the updated value passed back to the calling environment.
 ```sql
 CREATE OR REPLACE PROCEDURE APPLY_DISCOUNT (
